@@ -7,12 +7,12 @@ Este script convierte fuentes `.ttf` y `.otf` en `.woff` y `.woff2`, y genera un
 ## 📁 Estructura del proyecto
 
 Organiza tu carpeta así:
-
+```
 project/
 ├── fonts/ ← aquí van las fuentes originales (.otf, .ttf)
 ├── webfonts/ ← aquí se generarán .woff, .woff2 y fonts.css
 ├── convert_fonts.sh
-
+```
 
 
 ## 💻 Requisitos
