@@ -1,64 +1,79 @@
-# Font Converter CLI Tool
+# 🧰 Conversor de Fuentes Web
 
-A simple shell script to convert `.ttf` and `.otf` font files to `.woff` and `.woff2`, and automatically generate a CSS file with proper `@font-face` declarations and ready-to-use utility classes.
+Este script convierte fuentes `.ttf` y `.otf` en `.woff` y `.woff2`, y genera un archivo `fonts.css` listo para usar en la web.
 
-## 🔧 Features
+---
 
-- Converts fonts to `.woff` and `.woff2` using FontForge and woff2.
-- Supports multiple weights and styles (e.g. Regular, Bold, Italic).
-- Detects different font families based on file name.
-- Automatically generates `@font-face` CSS rules.
-- Includes CSS utility classes like `.roboto`, `.opensans`, etc.
+## 📁 Estructura del proyecto
 
-## 🧱 Requirements
+Organiza tu carpeta así:
 
-Make sure you have the following tools installed:
+project/
+├── fonts/ ← aquí van las fuentes originales (.otf, .ttf)
+├── webfonts/ ← aquí se generarán .woff, .woff2 y fonts.css
+├── convert_fonts.sh
 
-- [FontForge](https://fontforge.org)
-- [woff2](https://github.com/google/woff2)
 
-### On macOS:
+
+## 💻 Requisitos
+
+### En macOS:
+
 ```bash
 brew install fontforge woff2
 ```
-
-### On Ubuntu/Debian:
+### En Ubuntu/Debian:
 ```bash
+sudo apt update
 sudo apt install fontforge woff2
+```
+### En Windows (usando WSL - Windows Subsystem for Linux)
+1. Abre PowerShell como administrador y ejecuta:
+```powershell
+wsl --install
+```
+2. Una vez instalado Ubuntu, abre la terminal de Ubuntu y ejecuta:
+```bash
+sudo apt update
+sudo apt install fontforge woff2
+```
+3. Coloca tu proyecto en una ruta accesible, por ejemplo:
+C:\\Users\\tu_usuario\\Downloads\\project
+
+Y accede desde WSL así:
+```bash
+cd /mnt/c/Users/tu_usuario/Downloads/project
 ```
 
 
-## 🧱 Requirements
-1. Make the script executable:
+## 🛠️ Cómo usar
+1. Da permisos al script:
 ```bash
 chmod +x convert_fonts.sh
 ```
-2. Run the script with one or more font files:
+2. Ejecuta el script desde la raíz del proyecto:
 ```bash
-./convert_fonts.sh OpenSans-Regular.ttf OpenSans-BoldItalic.ttf Roboto-Light.ttf
+./convert_fonts.sh fonts/*.ttf fonts/*.otf
 ```
-3. The script will generate:
 
-.woff and .woff2 files
+3. El resultado estará en la carpeta webfonts/:
+- Archivos .woff y .woff2
+- Archivo fonts.css con reglas @font-face y clases de utilidad
 
-A fonts.css file containing:
+
+## 🎨 Cómo usar las fuentes en tu CSS
 ```css
-@font-face {
-  font-family: 'OpenSans';
-  src: url('OpenSans-Regular.woff2') format('woff2'),
-       url('OpenSans-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+@import url('webfonts/fonts.css');
+
+body {
+  font-family: 'Avenir', sans-serif;
 }
 
-.roboto {
-  font-family: 'Roboto';
+h1, h2, h3 {
+  font-family: 'Juana', serif;
 }
 ```
 
-## 📂 Output
+## 📌 Nota
+El script detecta automáticamente el peso (Light, Bold, etc.) y el estilo (Italic) según el nombre del archivo.
 
-All output files (.woff, .woff2, and fonts.css) are placed in the same directory as the script execution.
-
-##  📄 License
-MIT License. Use freely in personal or commercial projects.
